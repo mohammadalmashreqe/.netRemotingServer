@@ -13,10 +13,10 @@ namespace TicketServer
     {
         static void Main(string[] args)
         {
-            StartServer();
+            TicketServer();
         }
         //run server 
-        static void StartServer()
+        static void TicketServer()
         {
             try
             {
@@ -25,18 +25,19 @@ namespace TicketServer
                 HttpChannel httpChannel = new HttpChannel(9998);
                 ChannelServices.RegisterChannel(httpChannel);
 
-                Type commonInterfaceType = Type.GetType("StartServer.MovieTicket");
+                Type commonInterfaceType = Type.GetType("TicketServer.MovieTicket");
 
                 RemotingConfiguration.RegisterWellKnownServiceType(commonInterfaceType,
                     "MovieTicketBooking", WellKnownObjectMode.SingleCall);
 
-                Console.WriteLine("Press ENTER to exit");
+                Console.WriteLine("Press ENTER to quitnn");
                 Console.ReadLine();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
         }
 
     }
@@ -63,10 +64,9 @@ namespace TicketServer
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return "error";
+                return "";
             }
         }
 
-        //you can add more method here and call it remotly 
     }
 }
